@@ -1,4 +1,4 @@
-#ifdef LIBASM_H
+#ifndef LIBASM_H
 # define LIBASM_H
 # include <sys/types.h>
 
