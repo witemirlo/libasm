@@ -1,6 +1,6 @@
 section .data
 	END_LINE	db 0x0
-	msg		db "a", 0
+	msg		db "aa", 0
 
 section .text
 	global	_start
@@ -19,6 +19,7 @@ _start:
 
 	; exit with the return value of strlen
 	mov	rdi, rax
+	mov	rax, 60
 	syscall
 
 strlen:
@@ -28,7 +29,8 @@ strlen:
 	mov	rcx, 0
 
 _loop:
-	cmp	rdi, END_LINE
+	mov	al, [rdi]
+	cmp	al, 0
 	jne	_increase
 	jmp	_end
 
@@ -38,7 +40,7 @@ _increase:
 	jmp	_loop
 
 _end:
-	mov	rax, [rcx]
+	mov	rax, rcx
 
 	pop	rbp
 	ret
