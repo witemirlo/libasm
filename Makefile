@@ -40,6 +40,7 @@ execute_tests: $(NAME) $(TEST)
 
 clean:
 	rm -f $(OBJS)
+	rm -f $(TOBJS)
 
 fclean: clean
 	rm -f $(NAME)
