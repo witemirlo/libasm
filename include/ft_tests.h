@@ -2,6 +2,7 @@
 # define FT_TESTS_H
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
 
 # include "libasm.h"
@@ -9,5 +10,6 @@
 extern char const* msg[];
 
 void	ft_strlen_test(void);
+void	ft_strcpy_test(void);
 
 #endif

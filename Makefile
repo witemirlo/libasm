@@ -6,7 +6,8 @@ SRCS     := src/ft_strlen.s\
 OBJS     := $(SRCS:.s=.o)
 
 TESTS    := test/main.c\
-	    test/ft_strlen_test.c
+	    test/ft_strlen_test.c\
+	    test/ft_strcpy_test.c
 TOBJS    := $(TESTS:.c=.o)
 
 AS       := nasm
