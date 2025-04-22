@@ -25,18 +25,18 @@ re: fclean all
 $(NAME): $(OBJS) include/libasm.h
 	$(AR) $(LFLAGS) $(NAME) $(OBJS)
 
-$(TEST): $(TOBJS) include/ft_tests.h
+$(TEST): $(TOBJS) include/ft_tests.h $(OBJS) include/libasm.h
 	cc $(TOBJS) -I . -L . -lasm -o $(TEST)
 	make execute_tests
 
-execute_tests:
+execute_tests: $(NAME) $(TEST) 
 	./$(TEST)
 
 %.o: %.s
-	$(AS) $(ASFLAGS) $<
+	$(AS) $(ASFLAGS) $< -o $@
 
 %.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $<
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

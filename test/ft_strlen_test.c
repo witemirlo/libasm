@@ -15,6 +15,7 @@ void ft_strlen_test(void)
 	size_t og_strlen, my_strlen;
 	int fd, i;
 
+	printf("Tests from %s:\n", __func__);
 	for (i = 0; tests[i] != NULL; i++) {
 		og_strlen = strlen(tests[i]);
 		my_strlen = ft_strlen(tests[i]);
@@ -24,8 +25,8 @@ void ft_strlen_test(void)
 		else
 			fd = 1;
 
-		dprintf(fd, "%s %s %d: expected `%ld`, received `%ld`\n",
-				msg[fd - 1], __func__, i, og_strlen, my_strlen);
+		dprintf(fd, "%s test %2d: expected %2ld, received %2ld\n",
+				msg[fd - 1], i, og_strlen, my_strlen);
 	}
 }
 
