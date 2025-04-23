@@ -11,5 +11,6 @@ extern char const* msg[];
 
 void	ft_strlen_test(void);
 void	ft_strcpy_test(void);
+void	ft_strcmp_test(void);
 
 #endif
