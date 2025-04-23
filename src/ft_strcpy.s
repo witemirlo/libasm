@@ -8,8 +8,8 @@ ft_strcpy:
 	mov	rax, rdi ; put memory address of the dst in the register used in return value
 
 _loop:
-	mov	al, [rsi] ; second argument
-	cmp	al, 0
+	mov	cl, [rsi] ; second argument
+	cmp	cl, 0
 	jne	_cpy
 	jmp	_end
 
@@ -20,6 +20,6 @@ _cpy:
 	jmp	_loop
 
 _end:
-	mov	rdi, 0
+	movsb
 	pop	rbp
 	ret

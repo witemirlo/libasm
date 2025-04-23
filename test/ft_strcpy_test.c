@@ -34,9 +34,11 @@ void ft_strcpy_test(void)
 			fd = 1;
 
 		dprintf(fd, "%s test %2d:\n"
-			    "\tstrcpy: returned address: %p, original address: %p\n"
-			    "\tft_strcpy: returned address: %p, original address: %p\n",
-				msg[fd - 1], i, og_strcpy, og_address, my_strcpy, my_address);
+			    "\tstrcpy:    returned address: %p, original address: %p\n"
+			    "\tft_strcpy: returned address: %p, original address: %p\n"
+			    "\tstrcpy:    '%s'\n"
+			    "\tft_strcpy: '%s'\n",
+				msg[fd - 1], i, og_strcpy, og_address, my_strcpy, my_address, og_strcpy, my_strcpy);
 
 		free(og_strcpy);
 		free(my_strcpy);
