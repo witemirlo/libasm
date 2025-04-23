@@ -6,17 +6,16 @@ ft_strlen:
 	mov	rbp, rsp
 
 	mov	rcx, 0
+	jmp	_loop
+
+_increase:
+	inc	rcx
+	inc	rdi
 
 _loop:
 	mov	al, [rdi]
 	cmp	al, 0
 	jne	_increase
-	jmp	_end
-
-_increase:
-	inc	rcx
-	inc	rdi
-	jmp	_loop
 
 _end:
 	mov	rax, rcx
