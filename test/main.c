@@ -9,5 +9,6 @@ char const* msg[] = {
 int main(void)
 {
 	ft_strlen_test();
+	ft_strcpy_test();
         return 0;
 }

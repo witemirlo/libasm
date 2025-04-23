@@ -14,8 +14,9 @@ AS       := nasm
 ASFLAGS  := -f elf64 -O0 -gdwarf
 
 CC       := cc
-CFLAGS   := -Wall -Wextra -I include/ -L . -lasm
-CPPGLAGS := -I .
+LIB      := -L . -lasm
+CFLAGS   := -Wall -Wextra -O0 -g3
+CPPFLAGS := -I include/
 
 AR       := ar
 LFLAGS   := -c -r -s
@@ -27,7 +28,7 @@ $(NAME): $(OBJS) include/libasm.h
 	$(AR) $(LFLAGS) $(NAME) $(OBJS)
 
 $(TEST): $(TOBJS) include/ft_tests.h $(OBJS) include/libasm.h
-	cc $(TOBJS) -I . -L . -lasm -o $(TEST)
+	cc $(TOBJS) -o $(TEST) $(LIB)
 	make execute_tests
 
 execute_tests: $(NAME) $(TEST) 
