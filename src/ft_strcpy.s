@@ -15,8 +15,6 @@ _loop:
 
 _cpy:
 	movsb
-	inc	rsi
-	inc	rdi
 	jmp	_loop
 
 _end:
