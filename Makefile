@@ -2,12 +2,14 @@ NAME     := libasm.a
 TEST     := ft_test.out
 
 SRCS     := src/ft_strlen.s\
-	    src/ft_strcpy.s
+	    src/ft_strcpy.s\
+	#     src/ft_strcmp.s
 OBJS     := $(SRCS:.s=.o)
 
 TESTS    := test/main.c\
 	    test/ft_strlen_test.c\
-	    test/ft_strcpy_test.c
+	    test/ft_strcpy_test.c\
+	#     test/ft_strcmp_test.c
 TOBJS    := $(TESTS:.c=.o)
 
 AS       := nasm
