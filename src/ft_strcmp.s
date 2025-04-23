@@ -23,8 +23,8 @@ _loop:
 	jmp	_loop
 
 _end:
-	mov	al, [rdi]
-	sub	al, [rsi]
+	sub	al, cl
+	aas
 
 	pop	rbp
 	ret
