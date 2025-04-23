@@ -24,7 +24,7 @@ void ft_strlen_test(void)
 		og_strlen = strlen(tests[i]);
 		my_strlen = ft_strlen(tests[i]);
 
-		if (memcmp(&my_strlen, &og_strlen, sizeof(size_t)) != 0)
+		if (og_strlen != my_strlen)
 			fd = 2;
 		else
 			fd = 1;
