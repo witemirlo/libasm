@@ -3,7 +3,8 @@ TEST     := ft_test.out
 
 SRCS     := src/ft_strlen.s\
 	    src/ft_strcpy.s\
-	    src/ft_strcmp.s
+	    src/ft_strcmp.s\
+	    src/ft_write.s
 OBJS     := $(SRCS:.s=.o)
 
 TESTS    := test/main.c\

@@ -96,9 +96,9 @@ void ft_write_test(void)
 			else
 				fd = 1;
 
-			dprintf(fd, "%s test %2d: expected [errno: %2d, return: %2ld], "
+			dprintf(fd, "%s test %d.%d: expected [errno: %2d, return: %2ld], "
 			                         "received [errno: %2d, return: %2ld]\n",
-					msg[fd - 1], i, ret.og_errno, ret.og_return, ret.my_errno, ret.my_return);
+					msg[fd - 1], i, j, ret.og_errno, ret.og_return, ret.my_errno, ret.my_return);
 		}
 	}
 }

@@ -29,8 +29,8 @@ void ft_strcmp_test(void)
                         else
                                 fd = 1;
 
-                        dprintf(fd, "%s test %2d: expected %3d, received %3d\n",
-                                        msg[fd - 1], i, og_strcmp, my_strcmp);
+                        dprintf(fd, "%s test %d.%d: expected %3d, received %3d\n",
+                                        msg[fd - 1], i, j, og_strcmp, my_strcmp);
                 }
 	}
 }
