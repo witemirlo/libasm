@@ -4,6 +4,7 @@
 ft_strcmp:
 	push	rbp
 	mov	rbp, rsp
+	xor	rax, rax
 
 _loop:
 	mov	al, [rdi]
@@ -24,7 +25,6 @@ _loop:
 
 _end:
 	sub	al, cl
-	aas
 
 	pop	rbp
 	ret
