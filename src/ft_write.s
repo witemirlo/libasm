@@ -11,9 +11,8 @@ ft_write:
 	mov	rax, 1
 	syscall
 
-	; jmp	_end; debug
-	cmp	rax, 0
-	jb	_end ; no esta haciendo lo que toca
+	cmp	rax, -1
+	jg	_end
 
 _error:
 	xor	rcx, rcx
@@ -22,6 +21,7 @@ _error:
 	neg	rcx
 	
 	call	__errno_location
+
 	mov	[rax], rcx
 	mov	rax, -1
 
