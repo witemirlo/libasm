@@ -6,8 +6,6 @@ ft_write:
 	push	rbx
 	mov	rbx, rsp
 	
-	xor	rax, rax
-
 	mov	rax, 1
 	syscall
 
