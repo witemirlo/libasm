@@ -35,7 +35,7 @@ static bool check(t_data const* obj)
 static void create_file(void)
 {
 	const int random = open("/dev/random", O_RDONLY, 0);
-	const int fd = open(FILE_NAME, O_CREAT | O_WRONLY, 0644);
+	const int fd = open(FILE_NAME, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	char      buffer[BUFSIZ];
 
 	for (int i = 0; i < NUM; i++) {
@@ -43,80 +43,125 @@ static void create_file(void)
 		write(fd, buffer, BUFSIZ);
 	}
 
-	close(fd1);
+	close(fd);
+	close(random);
 }
 
 static void test(t_data* obj, int fd1, int fd2, size_t size)
 {
 	errno = 0;
-	obj->og_return = read(fd1, obj->og_buffer, BUFSIZ);
+	obj->og_return = read(fd1, obj->og_buffer, size);
 	obj->og_errno = errno;
 
 	errno = 0;
-	obj->my_return = read(fd1, obj->my_buffer, BUFSIZ);
+	obj->my_return = ft_read(fd2, obj->my_buffer, size);
 	obj->my_errno = errno;
 }
 
-static bool test_file(size_t size)
+static void test_file(size_t size, int n)
 {
 	create_file();
 
 	const int og_fd = open(FILE_NAME, O_RDONLY, 0);
 	const int my_fd = open(FILE_NAME, O_RDONLY, 0);
 	t_data    data = {0};
-	bool      ret = true;
+	int       fd = 1;
 
 	while (true) {
 		test(&data, og_fd, my_fd, size);
 		if (!check(&data)) {
-			ret = false;
+			fd = 2;
 			break;
 		}
-		if (data.my_return < 0)
+		if (data.my_return <= 0)
 			break;
 	}
+
 	close(og_fd);
 	close(my_fd);
 	unlink(FILE_NAME);
-	return ret;
+
+	dprintf(fd, "%s test %d: expected [errno: %2d, return: %2ld], "
+			       "received [errno: %2d, return: %2ld]\n",
+			msg[fd - 1], n,
+			data.og_errno, data.og_return,
+			data.my_errno, data.my_return);
 }
 
-
-void ft_write_test(void)
+static void test_file_1(int n)
 {
-	t_pair const tests[] = {
-		(t_pair){.str = "Hello, World!", .size = 13},
-		(t_pair){.str = "a", .size = 1},
-		(t_pair){.str = "", .size = 0},
-		(t_pair){.str = "\t\v\t\v\a\b\33\1", .size = 8},
-		(t_pair){.str = "\0\0\0\0\0", .size = 5},
-		(t_pair){.str = "😀", .size = sizeof("😀")},
-		(t_pair){.str = "😀\r\t\00\000🐀🐀🐀🐀🐀🐀\v\v\v\r\r\n\\n\n🐀", .size = (sizeof("😀") * 8) + 13},
-		(t_pair){.str = "𝔊𝔬𝔱𝔥𝔦𝔠", .size = sizeof("𝔊𝔬𝔱𝔥𝔦𝔠")},
-		(t_pair){.str = "oldɯǝɾǝ un sǝ ǝʇsǝ", .size = sizeof("oldɯǝɾǝ un sǝ ǝʇsǝ")},
-		(t_pair){.str = "⠞⠓⠊⠎⠀⠊⠎⠀⠁⠝⠀⠑⠭⠁⠍⠏⠇⠑", .size = sizeof("⠞⠓⠊⠎⠀⠊⠎⠀⠁⠝⠀⠑⠭⠁⠍⠏⠇⠑")},
-		(t_pair){0}
-	};
+	test_file(1, n);
+}
 
-	t_data (*tests_func[])(const void*, size_t) = {test_stdout, test_stderr, test_badfd, test_file, NULL};
-	t_data ret;
+static void test_file_10(int n)
+{
+	test_file(10, n);
+}
 
-	int fd, i, j;
+static void test_file_100(int n)
+{
+	test_file(100, n);
+}
 
+static void test_file_1000(int n)
+{
+	test_file(1000, n);
+}
+
+static void test_empty(int n)
+{
+	const int og_fd = open(FILE_NAME"1", O_CREAT | O_TRUNC | O_RDONLY, 0);
+	const int my_fd = open(FILE_NAME"2", O_CREAT | O_TRUNC | O_RDONLY, 0);
+	t_data    data = {0};
+	int       fd = 1;
+
+	test(&data, og_fd, my_fd, 42);
+	if (!check(&data))
+		fd = 2;
+
+	close(og_fd);
+	close(my_fd);
+	unlink(FILE_NAME"1");
+	unlink(FILE_NAME"2");
+
+	dprintf(fd, "%s test %d: expected [errno: %2d, return: %2ld], "
+			       "received [errno: %2d, return: %2ld]\n",
+			msg[fd - 1], n,
+			data.og_errno, data.og_return,
+			data.my_errno, data.my_return);
+}
+
+static void test_bad_size(int n)
+{
+	create_file();
+	const int og_fd = open(FILE_NAME, O_RDONLY, 0);
+	const int my_fd = open(FILE_NAME, O_RDONLY, 0);
+	t_data    data = {0};
+	int       fd = 1;
+
+	test(&data, og_fd, my_fd, -1);
+	if (!check(&data))
+		fd = 2;
+
+	close(og_fd);
+	close(my_fd);
+	unlink(FILE_NAME);
+
+	dprintf(fd, "%s test %d: expected [errno: %2d, return: %2ld], "
+			       "received [errno: %2d, return: %2ld]\n",
+			msg[fd - 1], n,
+			data.og_errno, data.og_return,
+			data.my_errno, data.my_return);
+}
+
+void ft_read_test(void)
+{
+	void (*tests_func[])(int) = {test_file_1, test_file_10, test_file_100, test_file_1000, test_empty, test_bad_size, NULL};
+
+	int i;
 
 	printf("Tests from %s:\n", __func__);
-	for (i = 0; tests[i].str != NULL; i++) {
-		for (j = 0; tests_func[j] != NULL; j++) {
-			ret = (tests_func[j])(tests[i].str, tests[i].size);
-
-			if ()
-				fd = 2;
-			else
-				fd = 1;
-
-			dprintf(fd, "%s test %d.%d: expected [errno: %2d, return: %2ld], "
-			                         "received [errno: %2d, return: %2ld]\n",
-					msg[fd - 1], i, j, ret.og_errno, ret.og_return, ret.my_errno, ret.my_return);
-		}
+	for (i = 0; tests_func[i] != NULL; i++) {
+		tests_func[i](i);
 	}
 }
