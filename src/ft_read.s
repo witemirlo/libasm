@@ -4,8 +4,8 @@
 	extern __errno_location
 
 ft_read:
-	push	rbx
-	mov	rbx, rsp
+	push	rbp
+	mov	rbp, rsp
 
 	mov	rax, 0
 	syscall
@@ -25,5 +25,5 @@ _error:
 	mov	rax, -1
 
 _end:
-	pop	rbx
+	pop	rbp
 	ret
