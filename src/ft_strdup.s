@@ -11,7 +11,7 @@ ft_strdup:
 	push	rbp
 	mov	rbp, rsp
 
-	mov	rsi, rdi ; backup of arg
+	mov	r11, rdi ; backup of arg, malloc changes rsi
 
 	; call ft_strlen
 	call	ft_strlen
@@ -25,6 +25,7 @@ ft_strdup:
 
 	; call ft_strcpy
 	mov	rdi, rax
+	mov	rsi, r11
 	call	ft_strcpy
 
 _end:
