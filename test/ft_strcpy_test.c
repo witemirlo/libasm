@@ -26,9 +26,11 @@ void ft_strcpy_test(void)
 		size = strlen(tests[i]) + 1;
 
 		og_strcpy = malloc(size * sizeof(char));
+		og_strcpy[size -1] = '*';
 		og_address = og_strcpy;
 
 		my_strcpy = malloc(size * sizeof(char));
+		my_strcpy[size -1] = '*';
 		my_address = my_strcpy;
 
 		og_strcpy = strcpy(og_strcpy, tests[i]);

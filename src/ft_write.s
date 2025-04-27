@@ -10,8 +10,12 @@ ft_write:
 	mov	rax, 1
 	syscall
 
-	cmp	rax, -1
-	jg	_end
+	cmp	rax, 0
+	jl	_error
+
+_end:
+	pop	rbp
+	ret
 
 _error:
 	xor	rcx, rcx
@@ -23,7 +27,4 @@ _error:
 
 	mov	[rax], rcx
 	mov	rax, -1
-
-_end:
-	pop	rbp
-	ret
+	jmp	_end
