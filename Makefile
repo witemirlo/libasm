@@ -37,7 +37,6 @@ $(NAME): $(OBJS) include/libasm.h
 
 $(TEST): $(TOBJS) include/ft_tests.h $(OBJS) include/libasm.h
 	cc $(TOBJS) -o $(TEST) $(LIB)
-	make execute_tests
 
 execute_tests: $(NAME) $(TEST) 
 	./$(TEST)
