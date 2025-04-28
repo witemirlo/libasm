@@ -38,7 +38,6 @@ void check_NULL(void)
 {
 	int pid1, pid2, ret1, ret2, fd;
 
-	strlen(0x1);
 	pid1 = fork();
 	if (pid1 == 0) {
 		int i = strlen(NULL);
