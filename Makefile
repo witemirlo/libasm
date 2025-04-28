@@ -29,7 +29,7 @@ CPPFLAGS := -I include/
 AR       := ar
 LFLAGS   := -c -r -s
 
-all: $(NAME) $(TEST)
+all: $(NAME)
 re: fclean all
 
 $(NAME): $(OBJS) include/libasm.h
@@ -38,7 +38,7 @@ $(NAME): $(OBJS) include/libasm.h
 $(TEST): $(TOBJS) include/ft_tests.h $(OBJS) include/libasm.h
 	cc $(TOBJS) -o $(TEST) $(LIB)
 
-execute_tests: $(NAME) $(TEST) 
+test: $(NAME) $(TEST) 
 	./$(TEST)
 
 %.o: %.s
