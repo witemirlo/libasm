@@ -21,18 +21,18 @@ ft_strdup:
 	call	malloc
 
 	cmp	rax, 0
-	je	_error ; jump if equal
+	je	.error ; jump if equal
 
 	; call ft_strcpy
 	mov	rdi, rax
 	mov	rsi, r11
 	call	ft_strcpy
 
-_end:
+.end:
 	pop	rbp
 	ret
 
-_error:
+.error:
 	xor	rcx, rcx
 
 	mov	rcx, rax
@@ -42,4 +42,4 @@ _error:
 
 	mov	[rax], rcx
 	mov	rax, 0
-	jmp	_end
+	jmp	.end

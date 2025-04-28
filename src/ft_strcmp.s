@@ -7,24 +7,24 @@ ft_strcmp:
 	xor	rax, rax
 	xor	rcx, rcx
 
-_loop:
+.loop:
 	mov	al, [rdi]
 	mov	cl, [rsi]
 
 	cmp	al, 0 
-	je	_end
+	je	.end
 
 	cmp	cl, 0 
-	je	_end
+	je	.end
 
 	cmp	al, cl
-	jne	_end
+	jne	.end
 
 	inc	rdi
 	inc	rsi
-	jmp	_loop
+	jmp	.loop
 
-_end:
+.end:
 	sub	rax, rcx
 
 	pop	rbp

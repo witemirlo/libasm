@@ -7,13 +7,13 @@ ft_strcpy:
 
 	mov	rax, rdi ; put memory address of the dst in the register used in return value
 
-_loop:
+.loop:
 	movsb
 	mov	cl, [rsi] ; second argument
 	cmp	cl, 0
-	jne	_loop
+	jne	.loop
 
-_end:
+.end:
 	movsb
 	pop	rbp
 	ret

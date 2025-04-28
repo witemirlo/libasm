@@ -11,13 +11,13 @@ ft_read:
 	syscall
 
 	cmp	rax, 0
-	jl	_error
+	jl	.error
 
-_end:
+.end:
 	pop	rbp
 	ret
 
-_error:
+.error:
 	xor	rcx, rcx
 
 	mov	rcx, rax
@@ -27,4 +27,4 @@ _error:
 
 	mov	[rax], rcx
 	mov	rax, -1
-	jmp	_end
+	jmp	.end
