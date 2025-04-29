@@ -1,6 +1,6 @@
 #include "ft_tests.h"
 
-void ft_strcpy_check(void)
+static void ft_strcpy_check(void)
 {
 	char const *tests[] = {
 		"Hello, World!",
@@ -58,7 +58,7 @@ void ft_strcpy_check(void)
 	}
 }
 
-ft_strcpy_check_arg_NULL()
+static void ft_strcpy_check_arg_NULL()
 {
 	int pid1, pid2, ret1, ret2, fd;
 	char ar[100];
@@ -95,7 +95,7 @@ ft_strcpy_check_arg_NULL()
 			msg[fd - 1], ret1, ret2);
 }
 
-ft_strcpy_check_NULL_arg()
+static void ft_strcpy_check_NULL_arg()
 {
 	int pid1, pid2, ret1, ret2, fd;
 	char ar[] = "hi!";
@@ -132,7 +132,7 @@ ft_strcpy_check_NULL_arg()
 			msg[fd - 1], ret1, ret2);
 }
 
-ft_strcpy_check_NULL_NULL()
+static void ft_strcpy_check_NULL_NULL()
 {
 	int pid1, pid2, ret1, ret2, fd;
 

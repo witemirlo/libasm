@@ -1,6 +1,6 @@
 #include "ft_tests.h"
 
-void ft_strlen_check(void)
+static void ft_strlen_check(void)
 {
 	char const *tests[] = {
 		"Hello, World!",
@@ -34,7 +34,7 @@ void ft_strlen_check(void)
 	}
 }
 
-void check_NULL(void)
+static void check_NULL(void)
 {
 	int pid1, pid2, ret1, ret2, fd;
 
