@@ -21,7 +21,7 @@ TOBJS    := $(TESTS:.c=.o)
 AS       := nasm
 ASFLAGS  := -f elf64 -O0 -gdwarf
 
-CC       := cc
+CC       := gcc
 LIB      := -L . -lasm
 CFLAGS   := -Wall -Wextra -O0 -g3
 CPPFLAGS := -I include/
@@ -36,7 +36,7 @@ $(NAME): $(OBJS) include/libasm.h
 	$(AR) $(LFLAGS) $(NAME) $(OBJS)
 
 $(TEST): $(TOBJS) include/ft_tests.h $(OBJS) include/libasm.h
-	cc $(TOBJS) -o $(TEST) $(LIB)
+	$(CC) $(TOBJS) -o $(TEST) $(LIB)
 
 test: $(NAME) $(TEST) 
 	./$(TEST)

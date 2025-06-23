@@ -23,7 +23,7 @@ ft_read:
 	mov	rcx, rax
 	neg	rcx
 
-	call	__errno_location
+	call	__errno_location wrt ..plt
 
 	mov	[rax], rcx
 	mov	rax, -1

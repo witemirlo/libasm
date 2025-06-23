@@ -11,35 +11,27 @@ ft_strdup:
 	push	rbp
 	mov	rbp, rsp
 
-	mov	r11, rdi ; backup of arg, malloc changes rsi
+	; backup of original argument
+	push	r12
+	mov	r12, rdi
 
 	; call ft_strlen
 	call	ft_strlen
 
 	; call malloc
 	mov	rdi, rax
-	call	malloc
+	inc	rdi
+	call	malloc wrt ..plt
 
 	cmp	rax, 0
-	je	.error ; jump if equal
+	je	.end
 
 	; call ft_strcpy
 	mov	rdi, rax
-	mov	rsi, r11
+	mov	rsi, r12
 	call	ft_strcpy
 
 .end:
+	pop	r12
 	pop	rbp
 	ret
-
-.error:
-	xor	rcx, rcx
-
-	mov	rcx, rax
-	neg	rcx
-
-	call	__errno_location
-
-	mov	[rax], rcx
-	mov	rax, 0
-	jmp	.end
