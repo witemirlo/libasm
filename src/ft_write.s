@@ -1,12 +1,9 @@
-.text:
+section .text
 	global ft_write
 
 	extern __errno_location
 
 ft_write:
-	push	rbp
-	mov	rbp, rsp
-	
 	mov	rax, 1
 	syscall
 
@@ -14,7 +11,6 @@ ft_write:
 	jl	.error
 
 .end:
-	pop	rbp
 	ret
 
 .error:

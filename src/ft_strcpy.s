@@ -1,10 +1,7 @@
-.text:
+section .text
 	global	ft_strcpy
 
 ft_strcpy:
-	push	rbp
-	mov	rbp, rsp
-
 	mov	rax, rdi ; put memory address of the dst in the register used in return value
 
 .loop:
@@ -15,5 +12,4 @@ ft_strcpy:
 
 .end:
 	movsb
-	pop	rbp
 	ret

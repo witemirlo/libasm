@@ -1,12 +1,9 @@
-.text:
+section .text
 	global ft_read
 
 	extern __errno_location
 
 ft_read:
-	push	rbp
-	mov	rbp, rsp
-
 	mov	rax, 0
 	syscall
 
@@ -14,7 +11,6 @@ ft_read:
 	jl	.error
 
 .end:
-	pop	rbp
 	ret
 
 .error:

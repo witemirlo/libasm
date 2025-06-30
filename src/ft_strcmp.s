@@ -1,9 +1,7 @@
-.text:
+section .text
 	global ft_strcmp
 
 ft_strcmp:
-	push	rbp
-	mov	rbp, rsp
 	xor	rax, rax
 	xor	rcx, rcx
 
@@ -27,5 +25,4 @@ ft_strcmp:
 .end:
 	sub	rax, rcx
 
-	pop	rbp
 	ret

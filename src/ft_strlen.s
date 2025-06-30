@@ -1,10 +1,7 @@
-.text:
+section .text
 	global	ft_strlen
 	
 ft_strlen:
-	push	rbp
-	mov	rbp, rsp
-
 	mov	rcx, 0
 	jmp	.loop
 
@@ -20,5 +17,4 @@ ft_strlen:
 .end:
 	mov	rax, rcx
 
-	pop	rbp
 	ret

@@ -7,9 +7,6 @@ section .text
 	extern malloc
 
 ft_strdup:
-	;push	rbp
-	;mov	rbp, rsp
-
 	; backup of original argument
 	push	r12
 	mov	r12, rdi
@@ -32,5 +29,4 @@ ft_strdup:
 
 .end:
 	pop	r12
-	;pop	rbp
 	ret
