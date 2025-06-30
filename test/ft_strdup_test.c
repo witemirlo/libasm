@@ -26,7 +26,7 @@ static void ft_strdup_check(void)
 
 		if (strlen(og_strdup) != strlen(my_strdup))
 			fd = 2;
-		else if (memcmp(og_strdup, my_strdup, strlen(og_strdup)) != 0)
+		else if (strcmp(og_strdup, my_strdup) != 0)
 			fd = 2;
 		else
 			fd = 1;
