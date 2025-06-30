@@ -1,15 +1,14 @@
-.text:
+section .text
 	global ft_strdup
 
 	extern ft_strlen
 	extern ft_strcpy
 
 	extern malloc
-	extern __errno_location
 
 ft_strdup:
-	push	rbp
-	mov	rbp, rsp
+	;push	rbp
+	;mov	rbp, rsp
 
 	; backup of original argument
 	push	r12
@@ -33,5 +32,5 @@ ft_strdup:
 
 .end:
 	pop	r12
-	pop	rbp
+	;pop	rbp
 	ret
